@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .container {
+      width: 30%;
+      height: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid lightblue;
+      margin: auto;
+      border-radius: 30px;
+    }
+    .calculator {
+      padding: 20px;
+      border-radius: 10px;
+      width: 78%;
+    }
+    .calculator form input {
+      border: 0;
+      outline: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+      background-color: cadetblue;
+      font-size: 20px;
+      cursor: pointer;
+      margin: 10px;
+      color: white;
+    }
+    form .display {
+      display: flex;
+      justify-content: flex-end;
+      margin: 20px 0;
+    }
+
+    form .display input {
+      text-align: right;
+      flex: 1;
+      font-size: 40px;
+      height: 40px;
+      width: 25px;
+    }
+    form input.equal {
+      width: 90%;
+    }
+    form input.operator {
+      color: white;
+    }
+  </style>
+  </head>
+  
+  <body>
+      <div class="container">
+        <div class="calculator">
+          <form>
+            <div class="display">
+              <input type="text" id="display" readonly />
+            </div>
+
+            <div>
+              <input type="button" value="AC" onclick="clearDisplay()" class="operator" />
+              <input type="button" value="DE" onclick="del()"class="operator"/>
+
+              <input type="button" value="%" onclick="percent()" />
+
+              <input type="button" value="/" onclick="add('/')" />
+            </div>
+
+           
+
+            <div>
+              <input type="button" value="7" onclick="add('7')" />
+
+              <input type="button" value="8" onclick="add('8')" />
+
+              <input type="button" value="9" onclick="add('9')" />
+
+              <input type="button" value="-" onclick="add('-')" />
+            </div>
+
+            <div>
+              <input type="button" value="4" onclick="add('4')" />
+
+              <input type="button" value="5" onclick="add('5')" />
+
+              <input type="button" value="6" onclick="add('6')" />
+
+              <input type="button" value="+" onclick="add('+')" />
+            </div>
+
+            <div>
+              <input type="button" value="1" onclick="add('1')" />
+
+              <input type="button" value="2" onclick="add('2')" />
+
+              <input type="button" value="3" onclick="add('3')" />
+              <input type="button" value="0" onclick="add('0')" />
+
+             
+    <div>
+              <input type="button" value="(" onclick="add('(')" />
+
+              <input type="button" value=")" onclick="add(')')" />
+
+              <input type="button" value="." onclick="dot()" />
+
+              <input type="button" value="*" onclick="add('*')" />
+
+            </div>
+            <div>
+                 <input type="button" value="=" onclick="answer()" class="equal" />
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <script>
+        let display = document.getElementById("display");
+
+        function add(value){
+
+let last = display.value.slice(-1);
+
+if(
+(last=='+' || last=='-' ||
+ last=='*' || last=='/') &&
+
+(value=='+'||  value=='-' ||
+ value=='*' || value=='/')
+){
+    return;
+}
+
+display.value += value;
+
+}
+        function clearDisplay() {
+          display.value = "";
+        }
+
+        function del() {
+          display.value = display.value.slice(0, -1);
+        }
+
+       function dot(){
+
+let lastNumber =
+display.value.split(/[\+\-\*\/]/).pop();
+
+if(!lastNumber.includes('.')){
+    display.value += '.';
+}
+
+}
+
+        function percent() {
+          if (display.value != "") {
+            display.value = eval(display.value) / 100;
+          }
+        }
+
+        function answer() {
+          if (display.value == "") {
+            display.value = "";
+          } else if (eval(display.value) == Infinity) {
+            display.value = "Error";
+          } else {
+            display.value = eval(display.value);
+          }
+        }
+      </script>
+    </body>
+  </body>
+</html>
